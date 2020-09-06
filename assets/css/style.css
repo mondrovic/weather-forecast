@@ -2,3 +2,21 @@
     --primary-color: #343a40;
     --secondary-color: ffc108;
 }
+
+.danger{
+    background-color: red;
+    border-radius: 15%;
+    color: white;
+}
+
+.warning{
+    background-color: orange;
+    border-radius: 15%;
+    color: white;
+}
+
+.okay{
+    background-color: rgb(55, 55, 209);
+    border-radius: 15%;
+    color: white;
+}

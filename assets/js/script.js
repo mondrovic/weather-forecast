@@ -43,7 +43,7 @@ var getWeather = function(location){
         alert('Unable to connect to Open Weather');
     });
     
-    
+
 };
 
 // displays the current date's information
@@ -89,7 +89,14 @@ var display5Day = function(data){
 var displayUv = function(uvData){
     var uvEl = document.createElement('p');
     uvEl.classList = 'p-2';
-    uvEl.textContent = 'UV Index: ' + uvData.value;
+    uvEl.textContent = 'UV Index: '
+
+    var uvRisk = document.createElement('span');
+    uvRisk.textContent = uvData.value;
+    // if(uvData.value)
+    // uvRisk.classList = 'okay';
+
+    uvEl.appendChild(uvRisk);
     currentDayEl.appendChild(uvEl);
 }
 
