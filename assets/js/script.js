@@ -4,23 +4,22 @@ var searchFormEl = document.querySelector('#search-form')
 var currentDayEl = document.querySelector('#current-day')
 var fiveDayEl = document.querySelector('#five-day')
 var cardContainerEl = document.querySelector('#card-container')
+var locationDateEl = document.querySelector('#location-date')
 
 var currentTime = moment().format('MMM Do, YYYY')
-
-var lat = 0
-var lon = 0
 
 // Handler for when user clicks submit button
 var formSubmitHandler = function(){
     event.preventDefault();
 
     // gets value from search
-    var cityState = searchInputEl.value.trim();
-    // removes whitespace from search term
-    cityState = cityState.replace(/ /g, '');
+    var cityState = searchInputEl.value.split(', ');
+    city = cityState[0].replace(/ /g, '+');
+    state = 'us-' + cityState[1];
+
     // checks if search term is good then runs function
     if(cityState){
-        getWeather(cityState);
+        getWeather(city, state);
         // clears out search from field
         searchInputEl.value = '';
     }else{
@@ -30,9 +29,9 @@ var formSubmitHandler = function(){
 
 
 // Gets API data from openweathermap for current day and forecast
-var getWeather = function(location){
+var getWeather = function(city, state){
     // format the open weather url for current
-    var apiCurrent = 'https://api.openweathermap.org/data/2.5/weather?q=' + location + '&units=imperial&appid=23ccf9e8695292de833093bcb9dac5b7'
+    var apiCurrent = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + ',' + state + '&units=imperial&appid=23ccf9e8695292de833093bcb9dac5b7'
 
     // makes request to URL with fetch
     fetch(apiCurrent).then(function(response){
@@ -43,6 +42,7 @@ var getWeather = function(location){
                 lat = data.coord.lat;
                 lon = data.coord.lon;
                 displayCurrent(data);
+
                 // runs fetch command for forecast -- have to run the previous fetch command first because have no way to input lat/lon without it
                 var apiForecast = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&exclude=current,minutely,hourly&units=imperial&appid=23ccf9e8695292de833093bcb9dac5b7'
                 fetch(apiForecast).then(function(response){
@@ -66,14 +66,12 @@ var getWeather = function(location){
 };
 
 // displays the current date's information
-var displayCurrent = function(data){
+var displayCurrent = function(data){    
+    // empties out content
     currentDayEl.textContent = '';
-    
+
     // places name of location and time
-    var cityDisplayEl = document.createElement('h4')
-    cityDisplayEl.classList = 'p-2';
-    cityDisplayEl.textContent = data.name + ' -- ' + currentTime;
-    currentDayEl.appendChild(cityDisplayEl);
+    locationDateEl.textContent = data.name
 
     var tempEl = document.createElement('p');
     tempEl.classList = 'p-2';
@@ -96,7 +94,7 @@ var displayCurrent = function(data){
 
 // ---- 5 Day Forecast Start
 var displayForecast = function(forecast){
-    console.dir(forecast);
+
     // empties out cards
     cardContainerEl.textContent = '';
 

@@ -17,7 +17,7 @@
         <span class="navbar-brand mb-0 h1">Weather App</span>
         
         <form class="form-inline my-2 my-lg-0" id="search-form">
-            <input class="form-control mr-sm-2" type="search" placeholder="City, State..." aria-label="Search" id="search-btn">
+            <input class="form-control mr-sm-2" type="search" placeholder="City, ST..." aria-label="Search" id="search-btn">
             <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
         </form>
     </nav>
@@ -29,8 +29,11 @@
             </div>
             <!-- weather results -->
             <div class="col-9">
-                <div class="card" id="current-day">
-                    <h4 class="p-2" id="city-search-term">Current Forecast:</h4>
+                <div class="card">
+                    <h4 class="p-2">Current forecast for <span id='location-date'></span></h4>
+                    <div id="current-day">
+
+                    </div>
                 </div>
                 <div class="card" id='five-day'>
                     <h4 class='p-2'>5-day Forecast:</h4>
