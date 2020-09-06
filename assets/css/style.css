@@ -3,20 +3,32 @@
     --secondary-color: ffc108;
 }
 
-.danger{
+.extreme{
+    background-color: violet;
+    border-radius: 15%;
+    color: white;
+}
+
+.very-high{
     background-color: red;
     border-radius: 15%;
     color: white;
 }
 
-.warning{
+.high{
     background-color: orange;
     border-radius: 15%;
-    color: white;
+    color: black;
 }
 
-.okay{
-    background-color: rgb(55, 55, 209);
+.moderate{
+    background-color: yellow;
+    border-radius: 15%;
+    color: black;
+}
+
+.low{
+    background-color: green;
     border-radius: 15%;
     color: white;
 }
