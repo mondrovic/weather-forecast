@@ -101,20 +101,23 @@ var displayForecast = function(forecast){
     cardContainerEl.textContent = '';
 
     // creates cards for next 5 days
-    for(i = 0; i < 5; i++){
+    for(i = 1; i < 6; i++){
         var dailyCard = document.createElement('div');
         dailyCard.classList = 'card bg-primary text-light m-2';
 
         var dailyDate = document.createElement('h4');
-        var newDate = moment(currentTime).clone().add(1, 'd');
-        dailyDate.textContent = newDate;
+        dailyDate.classList = 'p-2'
+        var nextDay = moment().add([i], 'day').format('MM/DD/YYYY');
+        dailyDate.textContent = nextDay;
         dailyCard.appendChild(dailyDate);
 
         var dailyTempEl = document.createElement('p');
+        dailyTempEl.classList = 'p-2'
         dailyTempEl.textContent = 'Temperature: ' + forecast.daily[i].temp.max + '\u00B0F';
         dailyCard.appendChild(dailyTempEl);
 
         var dailyHumidityEl = document.createElement('p');
+        dailyHumidityEl.classList = 'p-2'
         dailyHumidityEl.textContent = 'Humidity: ' + forecast.daily[i].humidity + '%';
         dailyCard.appendChild(dailyHumidityEl);
 
