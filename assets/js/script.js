@@ -21,9 +21,12 @@ $(document).ready(function(){
         // gets value from search
         var city = searchInputEl.value.trim();
 
-        // saves to recentCitiesArr
+        // saves to recentCitiesArr then recalls to update in real time
         recentCitiesArr.push(city);
         saveCities();
+        // clears content then reloads to show new searches in real time without doubling list
+        searchContainerEl.textContent = '';
+        loadCities();
 
         // checks if search term is good then runs function
         if(city){
